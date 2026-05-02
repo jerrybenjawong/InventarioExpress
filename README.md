@@ -95,25 +95,25 @@ MiInventarioExpress/
 
 ### Página de Login
 
-![Login](capturas/login.png)
+![Login](MiInventarioExpress/capturas/login.png)
 
 *Formulario de inicio de sesión con validación de credenciales.*
 
 ### Chat en Tiempo Real
 
-![Chat](capturas/chat.png)
+![Chat](MiInventarioExpress/capturas/chat.png)
 
 *Chat en vivo entre usuarios administradores usando Socket.io.*
 
 ### Listado de Productos
 
-![Productos](capturas/productos.png)
+![Productos](MiInventarioExpress/capturas/productos.png)
 
 *Vista de todos los productos con imágenes, precios y acciones CRUD.*
 
 ### Página de Inicio
 
-![Home](capturas/home.png)
+![Home](MiInventarioExpress/capturas/home.png)
 
 *Dashboard principal con acceso a todas las funcionalidades.*
 
@@ -129,12 +129,13 @@ MiInventarioExpress/
 1. **Clonar el repositorio:**
 
    ```bash
-   git clone <url-del-repositorio>
+   git clone https://github.com/jerrybenjawong/InventarioExpress.git
    ```
 
 2. **Instalar dependencias:**
 
    ```bash
+   cd MiInventarioExpress
    npm install
    ```
 
