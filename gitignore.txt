@@ -1,0 +1,4 @@
+MiInventarioExpress/node_modules/
+MiInventarioExpress/uploads/*
+!MiInventarioExpress/uploads/.gitkeep
+.env
