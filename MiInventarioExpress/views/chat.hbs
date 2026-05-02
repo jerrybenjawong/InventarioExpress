@@ -1,0 +1,31 @@
+<div class="chat-page">
+  <div class="page-header">
+    <h2>Chat en Tiempo Real</h2>
+    <p>Comunicación instantánea entre usuarios</p>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-sidebar">
+      <h3>Usuarios Conectados</h3>
+      <ul id="userList" class="user-list">
+        <li class="user-list-empty">Cargando...</li>
+      </ul>
+    </div>
+    <div class="chat-main">
+      <div id="chatMessages" class="chat-messages">
+        <div class="chat-message system-message">
+          <span class="message-text">Conectado al chat. ¡Bienvenido!</span>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="messageInput" placeholder="Escribe tu mensaje..." autocomplete="off">
+        <button id="sendMessage" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.currentUser = "{{user.username}}";
+</script>
+<script src="/js/chat.js"></script>

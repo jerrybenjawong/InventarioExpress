@@ -1,0 +1,58 @@
+{{!-- =======================================================
+  VISTA: HOME (Pagina de Inicio)
+  - Ruta: GET /
+  - Acceso: Publico (todos, con o sin autenticacion)
+  - Muestra un hero section con titulo y subtitulo
+  - Si hay usuario autenticado (user): botones de Productos,
+    Nuevo Producto, y si es admin tambien Chat
+  - Si NO hay sesion: botones de Login y Registro
+  - Seccion de caracteristicas con 4 tarjetas (features)
+  - Ver style.css seccion HOME
+======================================================= --}}
+<div class="home-hero">
+  <h1>Bienvenido a MiInventarioExpress</h1>
+  <p class="hero-subtitle">Sistema de gestión de productos con inventario en tiempo real</p>
+
+  {{!-- Botones contextuales segun estado de autenticacion --}}
+  {{#if user}}
+    {{!-- Usuario autenticado: acceso a funcionalidades completas --}}
+    <div class="home-actions">
+      <a href="/products" class="btn btn-primary btn-lg">Ver Productos</a>
+      <a href="/products/create" class="btn btn-secondary btn-lg">Nuevo Producto</a>
+      {{!-- Solo admins ven el boton del chat --}}
+      {{#if (eq user.role "admin")}}
+        <a href="/chat" class="btn btn-outline btn-lg">Chat en Vivo</a>
+      {{/if}}
+    </div>
+  {{else}}
+    {{!-- Visitante: solo puede iniciar sesion o registrarse --}}
+    <div class="home-actions">
+      <a href="/auth/login" class="btn btn-primary btn-lg">Iniciar Sesión</a>
+      <a href="/auth/register" class="btn btn-secondary btn-lg">Registrarse</a>
+    </div>
+  {{/if}}
+</div>
+
+{{!-- Seccion de caracteristicas: 4 tarjetas en grid --}}
+<div class="home-features">
+  <div class="feature-card">
+    <div class="feature-icon">📦</div>
+    <h3>Gestión de Productos</h3>
+    <p>CRUD completo: crea, lista, actualiza y elimina productos fácilmente.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🖼️</div>
+    <h3>Imágenes de Productos</h3>
+    <p>Sube imágenes para cada producto con validación de tipo y tamaño.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">💬</div>
+    <h3>Chat en Tiempo Real</h3>
+    <p>Comunicación instantánea entre usuarios administradores vía Socket.io.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🔒</div>
+    <h3>Autenticación Segura</h3>
+    <p>Registro y login con contraseñas encriptadas usando bcrypt.</p>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="form-container">
+  <h2>Nuevo Producto</h2>
+
+  {{#if errors}}
+    {{#each errors}}
+      <div class="alert alert-error">{{this.msg}}</div>
+    {{/each}}
+  {{/if}}
+
+  <form action="/products/create" method="POST" enctype="multipart/form-data" class="product-form">
+    <div class="form-group">
+      <label for="nombre">Nombre del Producto *</label>
+      <input type="text" id="nombre" name="nombre" value="{{producto.nombre}}" placeholder="Ej: Laptop HP" required minlength="3" maxlength="100">
+    </div>
+
+    <div class="form-group">
+      <label for="precio">Precio *</label>
+      <input type="number" id="precio" name="precio" value="{{producto.precio}}" placeholder="0.00" step="0.01" min="0" required>
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción *</label>
+      <textarea id="descripcion" name="descripcion" placeholder="Describe el producto (mínimo 10 caracteres)" required minlength="10" maxlength="1000" rows="4">{{producto.descripcion}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="imagen">Imagen del Producto</label>
+      <input type="file" id="imagen" name="imagen" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp">
+      <small class="form-hint">Formatos permitidos: JPG, PNG, GIF, WebP. Tamaño máximo: 5MB</small>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Guardar Producto</button>
+      <a href="/products" class="btn btn-outline">Cancelar</a>
+    </div>
+  </form>
+</div>

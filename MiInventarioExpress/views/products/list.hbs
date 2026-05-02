@@ -1,0 +1,43 @@
+<div class="products-page">
+  <div class="page-header">
+    <h2>Productos</h2>
+    <a href="/products/create" class="btn btn-primary">+ Nuevo Producto</a>
+  </div>
+
+  {{#if products.length}}
+    <div class="products-grid">
+      {{#each products}}
+        <div class="product-card">
+          <div class="product-image">
+            {{#if this.imagen}}
+              <img src="{{this.imagen}}" alt="{{this.nombre}}">
+            {{else}}
+              <div class="no-image">Sin imagen</div>
+            {{/if}}
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">{{this.nombre}}</h3>
+            <p class="product-price">${{this.precio}}</p>
+            <p class="product-desc">{{this.descripcion}}</p>
+            <div class="product-meta">
+              <small>Creado: {{formatDate this.creadoEn}}</small>
+            </div>
+          </div>
+          <div class="product-actions">
+            <a href="/products/edit/{{this._id}}" class="btn btn-sm btn-secondary">Editar</a>
+            <form action="/products/delete/{{this._id}}" method="POST" class="delete-form" onsubmit="return confirm('¿Estás seguro de eliminar este producto?');">
+              <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+            </form>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="empty-state">
+      <div class="empty-icon">📦</div>
+      <h3>No hay productos registrados</h3>
+      <p>Comienza agregando tu primer producto al inventario.</p>
+      <a href="/products/create" class="btn btn-primary">Crear Producto</a>
+    </div>
+  {{/if}}
+</div>

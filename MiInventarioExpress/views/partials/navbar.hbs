@@ -1,0 +1,36 @@
+{{!-- =======================================================
+  PARTIAL: NAVBAR (Barra de Navegacion)
+  - Se incluye en el layout principal
+  - Si el usuario esta autenticado (user existe): muestra
+    enlaces a Productos, Nuevo Producto, Chat, nombre de
+    usuario, rol y boton Cerrar Sesion
+  - Si NO esta autenticado: muestra enlaces Login y Registro
+  - Usa clases CSS para estilizar (ver style.css seccion NAVBAR)
+======================================================= --}}
+<nav class="navbar">
+  <div class="navbar-container">
+    {{!-- Logo/marca que enlaza al home --}}
+    <a href="/" class="navbar-brand">
+      🏪 MiInventarioExpress
+    </a>
+    <ul class="navbar-menu">
+      {{!-- Si el usuario inicio sesion, mostramos opciones completas --}}
+      {{#if user}}
+        <li><a href="/products">Productos</a></li>
+        <li><a href="/products/create">Nuevo Producto</a></li>
+        <li><a href="/chat">Chat</a></li>
+        <li>
+          <div class="user-info">
+            <span class="user-badge">{{user.username}}</span>
+            <span class="user-role">({{user.role}})</span>
+          </div>
+        </li>
+        <li><a href="/auth/logout" class="btn btn-sm btn-outline">Cerrar Sesión</a></li>
+      {{else}}
+        {{!-- Si NO hay sesion, solo login y registro --}}
+        <li><a href="/auth/login">Iniciar Sesión</a></li>
+        <li><a href="/auth/register" class="btn btn-sm btn-primary">Registrarse</a></li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>

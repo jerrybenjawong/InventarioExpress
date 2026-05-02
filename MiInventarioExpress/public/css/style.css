@@ -1,0 +1,945 @@
+/* =======================================================
+   ESTILOS DE MiInventarioExpress
+   Hoja de estilos principal para toda la aplicacion
+   Incluye: reset, layout, navbar, botones, alertas,
+   formularios, productos, chat, paginas de error
+   y estilos responsivos
+   ======================================================= */
+
+/* =======================================================
+   RESET BASICO
+   Elimina margenes/paddings por defecto del navegador
+   y establece box-sizing: border-box para que
+   padding y border se incluyan en el ancho/alto
+   ======================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =======================================================
+   BODY - Estilos base de la pagina
+   ======================================================= */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor principal que centra el contenido
+   y limita el ancho maximo a 1200px */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  flex: 1;
+}
+
+/* =======================================================
+   NAVBAR - Barra de navegacion superior
+   Se mantiene pegada arriba al hacer scroll (sticky)
+   Degradado azul con sombra para dar profundidad
+   ======================================================= */
+.navbar {
+  background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  color: white;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Flexbox para alinear marca a la izquierda y menu a la derecha */
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+/* Marca/nombre de la aplicacion en la navbar */
+.navbar-brand {
+  color: white;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* Menu de navegacion - lista horizontal sin viñetas */
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Enlaces del menu */
+.navbar-menu li a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+/* Efecto hover: se ilumina el texto */
+.navbar-menu li a:hover {
+  color: white;
+}
+
+/* Contenedor de info del usuario (nombre + badge de rol) */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Badge que muestra el nombre del usuario autenticado */
+.user-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Rol del usuario (admin/usuario) */
+.user-role {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+/* =======================================================
+   BOTONES
+   Sistema de botones con variantes: primary, secondary,
+   outline, danger, y tamanos sm/lg/block
+   ======================================================= */
+
+/* Estilo base de todos los botones */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+/* Boton primario - azul */
+.btn-primary {
+  background: #1a73e8;
+  color: white;
+}
+
+/* Efecto hover: se oscurece y se eleva ligeramente */
+.btn-primary:hover {
+  background: #1557b0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+}
+
+/* Boton secundario - gris */
+.btn-secondary {
+  background: #5f6368;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #4a4d51;
+}
+
+/* Boton outline - solo borde, fondo transparente */
+.btn-outline {
+  background: transparent;
+  color: #1a73e8;
+  border: 2px solid #1a73e8;
+}
+
+/* Al hacer hover se rellena de azul */
+.btn-outline:hover {
+  background: #1a73e8;
+  color: white;
+}
+
+/* Boton de peligro - rojo, para acciones destructivas como eliminar */
+.btn-danger {
+  background: #d93025;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #b3261e;
+}
+
+/* Variantes de tamano */
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 1.1rem;
+}
+
+/* Boton que ocupa todo el ancho disponible */
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* =======================================================
+   ALERTAS / MENSAJES FLASH
+   Aparecen al realizar acciones (exito, error)
+   Con animacion de entrada slideIn
+   ======================================================= */
+.alert {
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+}
+
+/* Alerta de exito - fondo verde claro */
+.alert-success {
+  background: #e6f4ea;
+  color: #1e7e34;
+  border: 1px solid #c3e6cb;
+}
+
+/* Alerta de error - fondo rojo claro */
+.alert-error {
+  background: #fce8e6;
+  color: #c5221f;
+  border: 1px solid #f5c6cb;
+}
+
+/* Animacion: el mensaje entra deslizandose desde arriba */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =======================================================
+   FOOTER - Pie de pagina
+   Fondo oscuro, texto gris claro, centrado
+   ======================================================= */
+.footer {
+  background: #333;
+  color: #aaa;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  font-size: 0.85rem;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+/* =======================================================
+   PAGINA DE INICIO (Home)
+   Hero section con titulo, subtitulo y botones de accion
+   Mas abajo: grid de tarjetas con caracteristicas
+   ======================================================= */
+.home-hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+
+.home-hero h1 {
+  font-size: 2.5rem;
+  color: #1a73e8;
+  margin-bottom: 10px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* Botones de accion en el hero */
+.home-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Grid de caracteristicas: se ajusta automaticamente
+   segun el espacio disponible (auto-fit) */
+.home-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+/* Tarjeta de caracteristica individual */
+.feature-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Efecto hover: la tarjeta se eleva */
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.feature-card h3 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.feature-card p {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* =======================================================
+   PAGINAS DE AUTENTICACION (Login / Registro)
+   Formulario centrado con tarjeta blanca
+   ======================================================= */
+
+/* Contenedor que centra vertical y horizontalmente */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+/* Tarjeta del formulario: fondo blanco con sombra */
+.auth-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+
+/* Espaciado entre campos del formulario */
+.auth-form .form-group {
+  margin-bottom: 18px;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Inputs del formulario de autenticacion */
+.auth-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+/* Efecto focus: borde azul con glow */
+.auth-form input:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+/* Enlace para cambiar entre login/registro */
+.auth-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.auth-link a {
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* =======================================================
+   LISTA DE PRODUCTOS
+   Page header con titulo + boton, grid de tarjetas,
+   cada tarjeta con imagen, datos y botones de accion
+   ======================================================= */
+.products-page {
+  padding: 20px 0;
+}
+
+/* Cabecera: titulo a la izquierda, boton a la derecha */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page-header h2 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* Grid de productos: se adapta automaticamente */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* Tarjeta de producto individual */
+.product-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Contenedor de imagen: 200px de alto, oculta overflow */
+.product-image {
+  width: 100%;
+  height: 200px;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* La imagen cubre el contenedor (object-fit: cover)
+   recorta la imagen para llenar el espacio sin deformarse */
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Placeholder cuando no hay imagen */
+.no-image {
+  color: #bbb;
+  font-size: 0.9rem;
+}
+
+/* Cuerpo de la tarjeta: nombre, precio, descripcion */
+.product-body {
+  padding: 16px;
+  flex: 1;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+/* Precio destacado en azul y mas grande */
+.product-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a73e8;
+  margin-bottom: 8px;
+}
+
+.product-desc {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+/* Metadatos (fechas) en gris claro y pequeno */
+.product-meta {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+/* Botones de accion (editar, eliminar) debajo de cada producto */
+.product-actions {
+  display: flex;
+  gap: 10px;
+  padding: 14px 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Formulario inline para el boton eliminar */
+.delete-form {
+  margin: 0;
+}
+
+/* =======================================================
+   ESTADO VACIO - Cuando no hay productos
+   Icono grande, texto y boton de accion
+   ======================================================= */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  color: #888;
+  margin-bottom: 24px;
+}
+
+/* =======================================================
+   FORMULARIOS - Crear / Editar productos
+   Contenedor centrado con tarjeta blanca
+   ======================================================= */
+.form-container {
+  max-width: 650px;
+  margin: 0 auto;
+  background: white;
+  padding: 36px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form-container h2 {
+  margin-bottom: 24px;
+  color: #333;
+}
+
+/* Grupo de campo: label + input */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Estilos para inputs y textarea en formularios */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="password"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+/* Focus verde-azul con glow */
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+.form-group input[type="file"] {
+  padding: 10px 0;
+}
+
+/* Texto de ayuda debajo de los campos (ej: "Max 5MB") */
+.form-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* Contenedor para los botones del formulario */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Imagen actual en el formulario de edicion */
+.current-image {
+  margin-top: 8px;
+}
+
+.current-image img {
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+}
+
+.no-image-text {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* =======================================================
+   PAGINAS DE ERROR (404, 500)
+   Centrado con icono grande y mensaje
+   ======================================================= */
+.error-page {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.error-page h1 {
+  font-size: 4rem;
+  color: #1a73e8;
+  margin-bottom: 8px;
+}
+
+.error-page h2 {
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.error-page p {
+  color: #777;
+  margin-bottom: 24px;
+}
+
+/* =======================================================
+   CHAT EN TIEMPO REAL
+   Layout con sidebar (usuarios) + area principal (mensajes)
+   Los mensajes tienen burbujas tipo chat
+   ======================================================= */
+.chat-page {
+  padding: 20px 0;
+}
+
+.chat-page .page-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.chat-page .page-header h2 {
+  color: #333;
+}
+
+.chat-page .page-header p {
+  color: #777;
+  margin-top: 4px;
+}
+
+/* Contenedor flex: sidebar a la izquierda, chat a la derecha */
+.chat-container {
+  display: flex;
+  gap: 20px;
+  height: 65vh;
+  min-height: 450px;
+}
+
+/* Barra lateral: lista de usuarios conectados */
+.chat-sidebar {
+  width: 220px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.chat-sidebar h3 {
+  font-size: 0.9rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Lista de usuarios */
+.user-list {
+  list-style: none;
+}
+
+/* Cada usuario con fondo azul claro y punto verde */
+.user-list li {
+  padding: 8px 12px;
+  background: #f0f4ff;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #1a73e8;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Punto verde (indicador de conexion) antes del nombre */
+.user-list li::before {
+  content: "🟢";
+  font-size: 0.6rem;
+}
+
+/* Estado vacio: sin usuarios */
+.user-list-empty {
+  color: #bbb !important;
+  background: transparent !important;
+}
+
+.user-list-empty::before {
+  content: "" !important;
+}
+
+/* Area principal del chat: mensajes + input */
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Zona de mensajes: scroll vertical, padding interno */
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Cada mensaje individual */
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  animation: messageSlide 0.3s ease;
+}
+
+/* Animacion: el mensaje aparece deslizandose desde abajo */
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mensaje del sistema: centrado, fondo gris claro */
+.chat-message.system-message {
+  align-self: center;
+  max-width: 90%;
+}
+
+.chat-message.system-message .message-text {
+  background: #f0f0f0;
+  color: #888;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+/* Mensaje propio: alineado a la derecha, fondo azul */
+.chat-message.user-message {
+  align-self: flex-end;
+}
+
+/* Burbuja del mensaje propio: esquinas redondeadas
+   con la esquina inferior derecha mas cuadrada
+   (estilo tipico de chats como WhatsApp) */
+.chat-message.user-message .message-text {
+  background: #1a73e8;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 18px 18px 4px 18px;
+}
+
+/* Mensaje de otro usuario: alineado a la izquierda */
+.chat-message.other-message {
+  align-self: flex-start;
+}
+
+/* Burbuja del mensaje ajeno: fondo gris claro,
+   esquina inferior izquierda mas cuadrada */
+.chat-message.other-message .message-text {
+  background: #e8eaed;
+  color: #333;
+  padding: 10px 16px;
+  border-radius: 18px 18px 18px 4px;
+}
+
+/* Nombre del autor en mensajes de otros */
+.message-author {
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+  padding: 0 8px;
+  color: #666;
+}
+
+/* Texto del mensaje: permite saltos de linea */
+.message-text {
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+/* Hora del mensaje (debajo) */
+.message-time {
+  font-size: 0.7rem;
+  color: #999;
+  margin-top: 4px;
+  padding: 0 8px;
+}
+
+/* Barra de input para escribir mensajes */
+.chat-input {
+  display: flex;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+
+/* Campo de texto del chat: bordes totalmente redondeados */
+.chat-input input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input input:focus {
+  border-color: #1a73e8;
+}
+
+/* Boton enviar del chat: tambien redondeado */
+.chat-input button {
+  padding: 12px 24px;
+  border-radius: 25px;
+}
+
+/* =======================================================
+   DISENO RESPONSIVO - Adaptacion a pantallas pequenas
+   Se activa cuando el ancho es <= 768px (tablets/moviles)
+   ======================================================= */
+@media (max-width: 768px) {
+  /* Navbar se apila verticalmente */
+  .navbar-container {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  /* Menu se ajusta a varias lineas */
+  .navbar-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  /* Titulo del hero mas pequeno */
+  .home-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  /* Una sola columna de productos */
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Chat: sidebar y area principal se apilan */
+  .chat-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* Sidebar mas pequeno */
+  .chat-sidebar {
+    width: 100%;
+    max-height: 150px;
+  }
+
+  /* Menos padding en formularios */
+  .form-container {
+    padding: 24px;
+  }
+
+  /* Page header se apila */
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,62 @@
+{{!-- =======================================================
+  LAYOUT PRINCIPAL - Plantilla base para TODAS las paginas
+  Handlebars inyecta el contenido de cada vista en {{{body}}}
+  Incluye:
+  - Head con meta tags, CSS y Socket.io client
+  - Navbar (partial)
+  - Alertas flash (success_msg, error_msg, error)
+  - Contenido de la pagina ({{{body}}})
+  - Footer (partial)
+  - Scripts globales (main.js)
+  Nota: socket.io.js se carga aqui para que este disponible
+  en cualquier pagina que necesite WebSockets (como el chat)
+======================================================= --}}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{!-- El titulo viene de cada vista via la variable 'title' --}}
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/css/style.css">
+  {{!-- Cliente Socket.io: se carga desde el servidor (CDN via servidor) --}}
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  {{!-- Incluye la barra de navegacion (views/partials/navbar.hbs) --}}
+  {{> navbar}}
+
+  <div class="container">
+    {{!-- Mensajes FLASH de connect-flash --}}
+    {{!-- success_msg: aparece tras operaciones exitosas (crear, editar, eliminar) --}}
+    {{#if success_msg}}
+      <div class="alert alert-success">
+        {{success_msg}}
+      </div>
+    {{/if}}
+
+    {{!-- error_msg: aparece tras errores de validacion o logica --}}
+    {{#if error_msg}}
+      <div class="alert alert-error">
+        {{error_msg}}
+      </div>
+    {{/if}}
+
+    {{!-- error: mensaje de error alternativo (usado en algunas rutas) --}}
+    {{#if error}}
+      <div class="alert alert-error">
+        {{error}}
+      </div>
+    {{/if}}
+
+    {{!-- AQUI se inyecta el contenido de cada pagina especifica --}}
+    {{{body}}}
+  </div>
+
+  {{!-- Incluye el pie de pagina (views/partials/footer.hbs) --}}
+  {{> footer}}
+
+  {{!-- Script principal con utilidades globales (auto-dismiss de alertas, etc.) --}}
+  <script src="/js/main.js"></script>
+</body>
+</html>
